@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lightshot Random Viewer</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    img { max-width: 90%; max-height: 80vh; margin-top: 20px; border: 1px solid #ccc; }
+    button { padding: 10px 20px; font-size: 16px; }
+    a { word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Random Lightshot Screenshot</h1>
+  <button onclick="loadImage()">Next Screenshot</button>
+  <p id="status">Click the button to load one.</p>
+  <img id="shot" src="" alt="">
+
+  <script>
+    async function loadImage() {
+      document.getElementById('status').textContent = 'Loading...';
+      document.getElementById('shot').src = '';
+      const res = await fetch('/api/random-image');
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('shot').src = data.img;
+        document.getElementById('status').innerHTML =
+          Image loaded from:<br><a href="${data.img}" target="_blank">${data.img}</a><br><br> +
+          Original prnt.sc link:<br><a href="${data.link}" target="_blank">${data.link}</a>;
+      } else {
+        document.getElementById('status').textContent = 'Failed to find a valid image. Try again.';
+      }
+    }
+  </script>
+</body>
+</html>
