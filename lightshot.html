@@ -19,7 +19,7 @@
     async function loadImage() {
       document.getElementById('status').textContent = 'Loading...';
       document.getElementById('shot').src = '';
-      const res = await fetch('/api/random-image');
+      const res = await fetch('https://sage-bald-pear.glitch.me/api/random-image');
       const data = await res.json();
       if (data.success) {
         document.getElementById('shot').src = data.img;
