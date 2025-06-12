@@ -19,7 +19,7 @@
     async function loadImage() {
       document.getElementById('status').textContent = 'Loading...';
       document.getElementById('shot').src = '';
-      const res = await fetch('https://lightshot-server.onrender.com');
+      const res = await fetch('https://lightshot-server.onrender.com/api/random-image');
       const data = await res.json();
       if (data.success) {
         document.getElementById('shot').src = data.img;
